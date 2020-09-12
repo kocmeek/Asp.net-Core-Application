@@ -1,0 +1,74 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<title>GeoSYS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link href="~/css/Style.min.css" rel="stylesheet" />
+<body>
+    <section class="menu">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="font-weight-bold text-uppercase mt-3 px-3">
+                                <a class="nav-link" href="/Products/List"> Kategoriler</a>
+                            </h3>
+                        </div>
+                        <div class="col-md-12">
+                            <ul class="nav flex-column mt-3">
+                                @for (int i = 0; i < WebApplication4.Class.MenuElements.MenuElement().Count; i++)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" href="/Products/FilterProduct/@WebApplication4.Class.MenuElements.MenuElementId()[i]">@WebApplication4.Class.MenuElements.MenuElement()[i]</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row bar p-4">
+                        <div class="col-md-12">
+                            <div class="image" style="background-image:url('/Images/LOGO.png')">
+                                <img src="~/Images/LOGO.png" alt="Logo" />
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <a href="/Products/ManageList" title="Link" class="text-decoration-none text-white mr-4 text-uppercase">Ürünler</a>
+                            <a href="/Categories/List" title="Link" class="text-decoration-none text-white mr-4 text-uppercase">Kategoriler</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mt-3">
+                            @RenderBody()
+
+                            @RenderSection("Modals", required: false)
+                            @if (IsSectionDefined("Scripts"))
+                            {
+                                @RenderSection("Scripts", required: true)
+
+                                @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+                                @*<script src="~/js/jquery-3.5.1.min.js"></script>*@
+                                <script src="~/lib/jquery/jquery-3.5.1.js"></script>
+                                <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+                                <script src="~/Scripts/priceFormat.js"></script>
+                                <script src="~/Scripts/JavaScript.js"></script>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
+

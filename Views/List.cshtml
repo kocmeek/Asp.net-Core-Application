@@ -1,0 +1,48 @@
+﻿@model List<WebApplication4.Models.Products>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_ViewLayout.cshtml";
+}
+
+@if (Model != null)
+{
+    <div class="row product-list mx-auto">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="col-md-4">
+                <div class="card mt-3">
+                    <div class="image" style="background-image:url('/images/@Model[i].cPictures')">
+                        <img class="card-img-top" src="/images/@Model[i].cPictures" alt="Card image cap">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@Model[i].cProductName</h5>
+                        <p class="card-text">@Model[i].fPrice TL</p>
+                        <button type="button" data-id="@Model[i].iProductId" class="btn btn-primary pd-setting-ed" data-toggle="ajax-modal" data-target="#productModal" data-url='@Url.Action("Detail","Products")'>Detaylı Bilgi</button>
+                        @*Modal*@ 
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+}
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.pd-setting-ed').click(function () {
+                console.log("melek");
+                var url = $(this).data('url');
+                console.log(url);
+                var id = $(this).attr('data-id');
+                console.log(id);
+                $.get(url + '/' + id, function (data) {
+                    $("#productModal").html(data);
+                    $("#productModal").modal('show');
+                });
+            });
+        });
+    </script>
+}
+
+
